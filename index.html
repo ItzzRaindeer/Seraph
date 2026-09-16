@@ -3,598 +3,798 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seraph — Official</title>
+
+<title>Solara | Mod Differently.</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
+:root {
+    --purple: #9b59ff;
+    --purple2: #7c3cff;
+    --bg: #08070d;
+    --panel: rgba(20, 17, 30, .72);
+    --border: rgba(155, 89, 255, .20);
+    --text: #ffffff;
+    --muted: #9994a8;
+}
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-:root {
-    --purple: #9b59ff;
-    --purple2: #c084ff;
-    --bg: #07070b;
-    --panel: rgba(20, 20, 29, 0.72);
-    --border: rgba(255,255,255,0.08);
-    --text: #fff;
-    --muted: #9696a5;
-}
-
 body {
-    font-family: Inter, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
+    font-family: Inter, sans-serif;
     overflow-x: hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* =========================
+   BACKGROUND
+========================= */
 
-.background {
+body::before {
+    content: "";
     position: fixed;
     inset: 0;
     z-index: -5;
-    overflow: hidden;
     background:
-        radial-gradient(circle at 50% 15%, rgba(155,89,255,.16), transparent 32%),
-        radial-gradient(circle at 10% 80%, rgba(112,60,204,.08), transparent 30%),
-        #07070b;
+        radial-gradient(circle at 20% 20%, rgba(155,89,255,.13), transparent 28%),
+        radial-gradient(circle at 80% 70%, rgba(124,60,255,.10), transparent 30%),
+        #08070d;
 }
 
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: .18;
-    animation: drift 12s ease-in-out infinite alternate;
-}
-
-.orb.one {
-    width: 350px;
-    height: 350px;
-    background: #9b59ff;
-    top: -120px;
-    left: 10%;
-}
-
-.orb.two {
-    width: 300px;
-    height: 300px;
-    background: #713dcc;
-    right: -100px;
-    top: 35%;
-    animation-delay: -4s;
-}
-
-.orb.three {
-    width: 250px;
-    height: 250px;
-    background: #b36cff;
-    left: 25%;
-    bottom: -100px;
-    animation-delay: -7s;
-}
-
-@keyframes drift {
-    from {
-        transform: translate(0,0) scale(1);
-    }
-    to {
-        transform: translate(50px,-30px) scale(1.15);
-    }
-}
-
-/* ================= PARTICLES ================= */
-
-.particles {
+.glow {
     position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -2;
-}
-
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #b987ff;
+    width: 450px;
+    height: 450px;
     border-radius: 50%;
-    opacity: .35;
-    animation: rise linear infinite;
+    background: rgba(155,89,255,.10);
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: -3;
 }
 
-@keyframes rise {
-    from {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-    20% {
-        opacity: .4;
-    }
-    80% {
-        opacity: .25;
-    }
-    to {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
+.glow.one {
+    top: -200px;
+    left: -150px;
 }
 
-/* ================= NAVBAR ================= */
+.glow.two {
+    bottom: -200px;
+    right: -150px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
     position: fixed;
     top: 18px;
     left: 50%;
     transform: translateX(-50%);
-    width: min(1100px, calc(100% - 30px));
-    height: 64px;
+    width: min(1100px, calc(100% - 40px));
+    height: 58px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 22px;
+    padding: 0 12px 0 18px;
 
-    background: rgba(12,12,18,.72);
-    backdrop-filter: blur(18px);
+    background: rgba(12, 10, 18, .70);
+    backdrop-filter: blur(20px);
 
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,.08);
     border-radius: 16px;
 
-    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.35),
+        0 0 30px rgba(155,89,255,.05);
 
-    z-index: 1000;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    font-size: 19px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.logo-mark {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
 
     display: grid;
     place-items: center;
 
     border-radius: 9px;
 
-    background: linear-gradient(135deg, #b878ff, #713dcc);
-    box-shadow: 0 0 25px rgba(155,89,255,.4);
+    background: linear-gradient(
+        135deg,
+        #b56cff,
+        #7836ff
+    );
 
-    font-size: 15px;
+    box-shadow: 0 0 25px rgba(155,89,255,.35);
+
+    font-weight: 900;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 27px;
+    gap: 8px;
 }
 
 .nav-links a {
-    color: #a7a7b3;
+    color: #aaa5b6;
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
-    transition: .25s;
+
+    padding: 10px 13px;
+    border-radius: 10px;
+
+    transition: .25s ease;
 }
 
 .nav-links a:hover {
     color: white;
+    background: rgba(255,255,255,.05);
 }
 
-.discord-nav {
-    padding: 10px 15px;
-    border-radius: 9px;
-
-    background: var(--purple);
+.nav-button {
     color: white !important;
 
-    box-shadow: 0 0 22px rgba(155,89,255,.25);
+    background: linear-gradient(
+        135deg,
+        #a866ff,
+        #843dff
+    );
+
+    box-shadow: 0 0 25px rgba(155,89,255,.25);
 }
 
-/* ================= HERO ================= */
+.nav-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 35px rgba(155,89,255,.4);
+}
 
-.hero {
+/* =========================
+   SECTIONS
+========================= */
+
+section {
     min-height: 100vh;
+    width: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    text-align: center;
+    position: relative;
 
-    padding: 130px 20px 80px;
+    padding: 120px 30px 80px;
 }
 
-.hero-content {
-    max-width: 900px;
+.container {
+    width: min(1050px, 100%);
+    margin: auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
 }
 
 .badge {
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
     padding: 8px 14px;
 
-    border-radius: 100px;
+    border-radius: 999px;
 
-    border: 1px solid rgba(155,89,255,.3);
     background: rgba(155,89,255,.08);
+    border: 1px solid rgba(155,89,255,.20);
 
-    color: #d5baff;
+    color: #b991ff;
 
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
 
-    margin-bottom: 25px;
-
-    box-shadow: 0 0 30px rgba(155,89,255,.08);
-}
-
-.badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #a66aff;
-    box-shadow: 0 0 12px #9b59ff;
+    margin-bottom: 24px;
 }
 
 .hero h1 {
     font-size: clamp(65px, 12vw, 140px);
-    line-height: .9;
+    line-height: .85;
 
     font-weight: 900;
-    letter-spacing: -5px;
+    letter-spacing: -7px;
 
     background: linear-gradient(
-        135deg,
+        120deg,
         white 20%,
-        #d9bdff 55%,
-        #9b59ff 100%
+        #d8c0ff 48%,
+        #8f4cff 85%
     );
 
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 
-    text-shadow: 0 0 70px rgba(155,89,255,.15);
-
-    animation: heroFloat 5s ease-in-out infinite;
+    filter: drop-shadow(
+        0 0 30px rgba(155,89,255,.20)
+    );
 }
 
-@keyframes heroFloat {
-    0%,100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
+.typing-wrapper {
+    margin-top: 30px;
+    height: 34px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.hero h2 {
-    margin-top: 20px;
-
-    font-size: clamp(20px, 3vw, 28px);
-    color: #dedee5;
+.typing {
+    color: #c6a5ff;
+    font-size: 20px;
     font-weight: 600;
 }
 
-.hero p {
-    max-width: 650px;
-    margin: 22px auto 35px;
+.cursor {
+    width: 2px;
+    height: 23px;
 
-    color: var(--muted);
-    line-height: 1.8;
-    font-size: 15px;
+    background: var(--purple);
+
+    margin-left: 4px;
+
+    animation: blink .8s infinite;
 }
 
-.buttons {
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* =========================
+   SCROLL PROMPT
+========================= */
+
+.scroll-more {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+
     display: flex;
-    justify-content: center;
-    gap: 13px;
-    flex-wrap: wrap;
-}
-
-.button {
-    display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 9px;
+    gap: 10px;
 
-    padding: 14px 23px;
+    color: #777185;
 
-    border-radius: 10px;
-
-    text-decoration: none;
-    font-size: 13px;
+    font-size: 9px;
     font-weight: 700;
+    letter-spacing: 3px;
 
-    transition: .25s;
+    transition: .5s ease;
 }
 
-.primary {
-    color: white;
-    background: linear-gradient(135deg,#a765ff,#7a3fd3);
-
-    box-shadow:
-        0 0 25px rgba(155,89,255,.3),
-        inset 0 1px rgba(255,255,255,.18);
+.scroll-more.hidden {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+    pointer-events: none;
 }
 
-.primary:hover {
-    transform: translateY(-4px);
-    box-shadow:
-        0 0 40px rgba(155,89,255,.45);
-}
+.scroll-icon {
+    width: 25px;
+    height: 38px;
 
-.secondary {
-    color: white;
-    background: rgba(255,255,255,.04);
-    border: 1px solid var(--border);
-}
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 20px;
 
-.secondary:hover {
-    transform: translateY(-4px);
-    border-color: rgba(155,89,255,.5);
-    background: rgba(155,89,255,.08);
-}
-
-/* ================= SECTION ================= */
-
-.section {
-    padding: 110px 7%;
-}
-
-.section-header {
-    max-width: 700px;
-    margin: auto;
-    text-align: center;
-    margin-bottom: 55px;
-}
-
-.section-header .small {
-    color: var(--purple2);
-    font-size: 12px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.section-header h2 {
-    font-size: clamp(32px,5vw,48px);
-    margin: 12px 0;
-}
-
-.section-header p {
-    color: var(--muted);
-    line-height: 1.7;
-}
-
-/* ================= CARDS ================= */
-
-.cards {
-    max-width: 1100px;
-    margin: auto;
-
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 18px;
-}
-
-.card {
     position: relative;
-
-    padding: 30px;
-
-    background: var(--panel);
-    backdrop-filter: blur(15px);
-
-    border: 1px solid var(--border);
-    border-radius: 16px;
-
-    overflow: hidden;
-
-    transition: .3s;
 }
 
-.card::after {
+.scroll-icon::after {
     content: "";
 
     position: absolute;
 
-    width: 130px;
-    height: 130px;
+    width: 3px;
+    height: 7px;
 
-    right: -70px;
-    top: -70px;
+    background: white;
+    border-radius: 5px;
 
+    left: 50%;
+    top: 7px;
+
+    transform: translateX(-50%);
+
+    animation: scrollDot 1.5s infinite;
+}
+
+@keyframes scrollDot {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 13px);
+    }
+}
+
+/* =========================
+   SIDE DOTS
+========================= */
+
+.scroll-dots {
+    position: fixed;
+
+    right: 28px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    padding: 12px 8px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: rgba(15,12,22,.45);
+    backdrop-filter: blur(15px);
+
+    border-radius: 20px;
+
+    z-index: 90;
+}
+
+.scroll-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.20);
+
+    transition: .3s ease;
+
+    cursor: pointer;
+}
+
+.scroll-dot.active {
     background: var(--purple);
-    filter: blur(65px);
 
-    opacity: 0;
+    transform: scale(1.5);
 
-    transition: .3s;
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 18px rgba(155,89,255,.7);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.section-label {
+    color: #a875ff;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 13px;
+}
+
+.section-title {
+    font-size: clamp(35px, 5vw, 55px);
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.section-title span {
+    color: var(--purple);
+}
+
+.section-description {
+    color: var(--muted);
+
+    max-width: 570px;
+
+    margin-top: 14px;
+
+    line-height: 1.7;
+}
+
+.features-grid {
+    margin-top: 50px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.card {
+    padding: 27px;
+
+    min-height: 180px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(20px);
+
+    transition: .3s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(155,89,255,.4);
+    transform: translateY(-7px);
+
+    border-color: rgba(155,89,255,.45);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25),
+        0 0 35px rgba(155,89,255,.08);
 }
 
-.card:hover::after {
-    opacity: .18;
-}
-
-.icon {
-    width: 48px;
-    height: 48px;
+.card-icon {
+    width: 40px;
+    height: 40px;
 
     display: grid;
     place-items: center;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
-    background: rgba(155,89,255,.11);
-    border: 1px solid rgba(155,89,255,.16);
+    background: rgba(155,89,255,.12);
 
-    color: #bd91ff;
+    color: #b47cff;
 
-    font-size: 20px;
+    margin-bottom: 20px;
 
-    margin-bottom: 22px;
+    font-size: 18px;
 }
 
 .card h3 {
-    font-size: 18px;
-    margin-bottom: 11px;
+    font-size: 16px;
+    margin-bottom: 8px;
 }
 
 .card p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.7;
+    color: #8e899b;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
-/* ================= STATS ================= */
+/* =========================
+   MENU UI
+========================= */
 
-.stats {
-    max-width: 900px;
-    margin: 55px auto 0;
-
+.ui-section {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+
+    align-items: center;
 }
 
-.stat {
-    text-align: center;
+.menu-window {
+    width: 100%;
+    height: 380px;
 
-    padding: 27px;
+    background: rgba(14,11,22,.85);
 
-    background: rgba(15,15,22,.7);
+    border: 1px solid rgba(155,89,255,.25);
 
-    border: 1px solid var(--border);
-    border-radius: 14px;
-}
+    border-radius: 20px;
 
-.stat strong {
-    display: block;
-
-    font-size: 31px;
-
-    background: linear-gradient(135deg,#fff,#9b59ff);
-    -webkit-background-clip: text;
-    color: transparent;
-
-    margin-bottom: 6px;
-}
-
-.stat span {
-    color: #777784;
-    font-size: 12px;
-}
-
-/* ================= DOWNLOAD ================= */
-
-.download {
-    max-width: 1000px;
-    margin: auto;
-
-    padding: 70px 30px;
-
-    text-align: center;
-
-    border-radius: 22px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(155,89,255,.13),
-            transparent 60%
-        ),
-        rgba(17,17,24,.8);
-
-    border: 1px solid rgba(155,89,255,.22);
+    overflow: hidden;
 
     box-shadow:
-        0 0 80px rgba(155,89,255,.07);
+        0 30px 100px rgba(0,0,0,.5),
+        0 0 60px rgba(155,89,255,.08);
+
+    transform: perspective(1000px) rotateY(-5deg);
+
+    transition: .4s ease;
 }
 
-.download h2 {
-    font-size: clamp(35px,5vw,55px);
-    margin-bottom: 13px;
+.menu-window:hover {
+    transform: perspective(1000px) rotateY(0deg);
 }
 
-.download p {
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto 30px;
-    line-height: 1.7;
+.menu-top {
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
-/* ================= FOOTER ================= */
+.menu-logo {
+    width: 25px;
+    height: 25px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 7px;
+
+    background: var(--purple);
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.menu-name {
+    margin-left: 9px;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.menu-body {
+    display: flex;
+    height: calc(100% - 48px);
+}
+
+.menu-sidebar {
+    width: 125px;
+
+    padding: 15px 10px;
+
+    border-right: 1px solid rgba(255,255,255,.05);
+}
+
+.side-item {
+    padding: 11px;
+
+    margin-bottom: 5px;
+
+    border-radius: 8px;
+
+    color: #777182;
+
+    font-size: 10px;
+}
+
+.side-item.selected {
+    color: white;
+
+    background: rgba(155,89,255,.15);
+
+    box-shadow:
+        inset 2px 0 var(--purple);
+}
+
+.menu-content {
+    flex: 1;
+
+    padding: 25px;
+}
+
+.menu-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.menu-content p {
+    color: #777182;
+    font-size: 10px;
+    margin-bottom: 20px;
+}
+
+.mod-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.mod-name {
+    font-size: 11px;
+}
+
+.toggle {
+    width: 31px;
+    height: 17px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.1);
+
+    position: relative;
+}
+
+.toggle::after {
+    content: "";
+
+    position: absolute;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    top: 3px;
+    left: 3px;
+
+    background: #777;
+}
+
+.toggle.on {
+    background: rgba(155,89,255,.45);
+}
+
+.toggle.on::after {
+    left: 17px;
+    background: var(--purple);
+
+    box-shadow: 0 0 10px var(--purple);
+}
+
+/* =========================
+   DEVELOPER CARD
+========================= */
+
+.developer-card {
+    margin-top: 60px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    padding: 25px;
+
+    width: fit-content;
+
+    background: rgba(18,15,27,.65);
+
+    border: 1px solid rgba(155,89,255,.20);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(20px);
+}
+
+.pfp {
+    width: 82px;
+    height: 82px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid var(--purple);
+
+    box-shadow:
+        0 0 15px rgba(155,89,255,.65),
+        0 0 35px rgba(155,89,255,.25);
+}
+
+.dev-name {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.dev-role {
+    margin-top: 5px;
+
+    color: #a875ff;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
-    padding: 35px 20px;
+    padding: 40px;
 
     text-align: center;
 
-    border-top: 1px solid var(--border);
+    color: #5f596b;
 
-    color: #5f5f6b;
+    border-top: 1px solid rgba(255,255,255,.05);
+
     font-size: 12px;
 }
 
-footer strong {
-    color: var(--purple);
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
 }
 
-/* ================= MOBILE ================= */
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-@media(max-width:800px) {
+/* =========================
+   MOBILE
+========================= */
 
-    .navbar {
-        top: 10px;
-    }
+@media(max-width: 800px) {
 
-    .nav-links {
-        gap: 12px;
-    }
-
-    .nav-links a:not(.discord-nav) {
+    .nav-links a:not(.nav-button) {
         display: none;
     }
 
-    .cards {
+    .features-grid {
         grid-template-columns: 1fr;
     }
 
-    .stats {
+    .ui-section {
         grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .menu-window {
+        transform: none;
+    }
+
+    .scroll-dots {
+        right: 12px;
+    }
+
+    section {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .hero h1 {
-        letter-spacing: -3px;
-    }
-
-    .section {
-        padding: 80px 20px;
+        letter-spacing: -4px;
     }
 }
 </style>
@@ -602,214 +802,142 @@ footer strong {
 
 <body>
 
-<!-- BACKGROUND -->
+<div class="glow one"></div>
+<div class="glow two"></div>
 
-<div class="background">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
-</div>
-
-<div class="particles" id="particles"></div>
-
-
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
-    <div class="logo">
-        <div class="logo-mark">S</div>
-        SERAPH
+    <div class="brand">
+        <div class="logo">S</div>
+        SOLARA
     </div>
 
     <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#features">Features</a>
+        <a href="#ui">UI</a>
         <a href="#download">Download</a>
-
-        <a
-            class="discord-nav"
-            href="https://discord.gg/ext7RjH4gy"
-            target="_blank"
-        >
+        <a href="#ui" class="nav-button">Try UI</a>
+        <a href="https://discord.gg/ext7RjH4gy" target="_blank" class="nav-button">
             Discord
         </a>
     </div>
 
 </nav>
 
+<!-- =========================
+     SCROLL DOTS
+========================= -->
 
-<!-- HERO -->
+<div class="scroll-dots">
 
-<section class="hero" id="home">
+    <div class="scroll-dot active" data-section="home"></div>
+    <div class="scroll-dot" data-section="features"></div>
+    <div class="scroll-dot" data-section="ui"></div>
+    <div class="scroll-dot" data-section="download"></div>
 
-    <div class="hero-content">
+</div>
 
-        <div class="badge">
-            <span class="badge-dot"></span>
-            V2.1 • Latest Release
-        </div>
+<!-- =========================
+     HERO
+========================= -->
 
-        <h1>SERAPH</h1>
+<section id="home" class="hero">
 
-        <h2>Built Different.</h2>
-
-        <p>
-            Welcome to the official Seraph website.
-            Explore the project, discover what's new,
-            and stay connected with the community.
-        </p>
-
-        <div class="buttons">
-
-            <a class="button primary" href="#download">
-                Get Started →
-            </a>
-
-            <a class="button secondary" href="#features">
-                Explore Features
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FEATURES -->
-
-<section class="section" id="features">
-
-    <div class="section-header">
-
-        <div class="small">
-            SERAPH
-        </div>
-
-        <h2>
-            Everything in one place.
-        </h2>
-
-        <p>
-            A clean and modern home for the Seraph project.
-        </p>
-
-    </div>
-
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="icon">✦</div>
-
-            <h3>
-                Clean Interface
-            </h3>
-
-            <p>
-                A polished dark interface with Seraph's
-                signature purple aesthetic.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="icon">⚡</div>
-
-            <h3>
-                Regular Updates
-            </h3>
-
-            <p>
-                Keep up with new versions, improvements,
-                and changes to the project.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="icon">◈</div>
-
-            <h3>
-                Community
-            </h3>
-
-            <p>
-                Join the Discord community and stay
-                up to date with announcements.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- STATS -->
-
-    <div class="stats">
-
-        <div class="stat">
-            <strong>V2.1</strong>
-            <span>Current Version</span>
-        </div>
-
-        <div class="stat">
-            <strong>35+</strong>
-            <span>Features</span>
-        </div>
-
-        <div class="stat">
-            <strong>2026</strong>
-            <span>Project Year</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- DOWNLOAD -->
-
-<section class="section" id="download">
-
-    <div class="download">
+    <div class="container">
 
         <div class="badge">
-            <span class="badge-dot"></span>
-            SERAPH COMMUNITY
+            GORILLA TAG MOD MENU
         </div>
 
-        <h2>
-            Ready to join?
-        </h2>
+        <h1>SOLARA</h1>
 
-        <p>
-            Check out the Seraph community for announcements,
-            updates, and more information about the project.
-        </p>
+        <div class="typing-wrapper">
+            <span class="typing"></span>
+            <span class="cursor"></span>
+        </div>
 
-        <div class="buttons">
+    </div>
 
-            <a
-                class="button primary"
-                href="https://discord.gg/ext7RjH4gy"
-                target="_blank"
-            >
-                Join Discord →
-            </a>
+    <div class="scroll-more" id="scrollMore">
 
-            <a
-                class="button secondary"
-                href="#home"
-            >
-                Back to Top
-            </a>
+        <div class="scroll-icon"></div>
+
+        <span>SCROLL TO MORE</span>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section id="features">
+
+    <div class="container">
+
+        <div class="reveal">
+
+            <div class="section-label">
+                WHY SOLARA
+            </div>
+
+            <div class="section-title">
+                Everything You <span>Need.</span>
+            </div>
+
+            <p class="section-description">
+                A clean, modern UI designed around simplicity,
+                customization and a smooth experience.
+            </p>
+
+        </div>
+
+        <div class="features-grid">
+
+            <div class="card reveal">
+
+                <div class="card-icon">⚡</div>
+
+                <h3>Fast & Clean</h3>
+
+                <p>
+                    A lightweight interface focused on keeping
+                    everything simple and easy to navigate.
+                </p>
+
+            </div>
+
+            <div class="card reveal">
+
+                <div class="card-icon">◆</div>
+
+                <h3>Customizable</h3>
+
+                <p>
+                    A flexible UI designed to fit your own style
+                    without unnecessary clutter.
+                </p>
+
+            </div>
+
+            <div class="card reveal">
+
+                <div class="card-icon">✦</div>
+
+                <h3>Modern Design</h3>
+
+                <p>
+                    Glass panels, smooth animations and a
+                    polished purple aesthetic.
+                </p>
+
+            </div>
 
         </div>
 
@@ -817,43 +945,399 @@ footer strong {
 
 </section>
 
+<!-- =========================
+     UI SECTION
+========================= -->
 
-<!-- FOOTER -->
+<section id="ui">
+
+    <div class="container">
+
+        <div class="ui-section">
+
+            <div class="reveal">
+
+                <div class="section-label">
+                    TRY THE UI
+                </div>
+
+                <div class="section-title">
+                    Simple. <span>Clean.</span> Powerful.
+                </div>
+
+                <p class="section-description">
+                    Get a preview of the Solara interface.
+                    This is a visual UI sample only.
+                </p>
+
+                <!-- DEVELOPER CARD -->
+
+                <div class="developer-card">
+
+                    <!--
+                    Rename your uploaded PFP to:
+                    pfp.jpg
+
+                    Put it in the SAME folder as index.html.
+                    -->
+
+                    <img
+                        src="pfp.jpg"
+                        alt="ZykerGT"
+                        class="pfp"
+                    >
+
+                    <div>
+
+                        <div class="dev-name">
+                            ZykerGT
+                        </div>
+
+                        <div class="dev-role">
+                            Solara Developer
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FAKE UI PREVIEW -->
+
+            <div class="menu-window reveal">
+
+                <div class="menu-top">
+
+                    <div class="menu-logo">
+                        S
+                    </div>
+
+                    <div class="menu-name">
+                        SOLARA
+                    </div>
+
+                </div>
+
+                <div class="menu-body">
+
+                    <div class="menu-sidebar">
+
+                        <div class="side-item selected">
+                            Home
+                        </div>
+
+                        <div class="side-item">
+                            Mods
+                        </div>
+
+                        <div class="side-item">
+                            Settings
+                        </div>
+
+                        <div class="side-item">
+                            About
+                        </div>
+
+                    </div>
+
+                    <div class="menu-content">
+
+                        <h3>
+                            Welcome Back
+                        </h3>
+
+                        <p>
+                            Your mods. Your menu.
+                        </p>
+
+                        <div class="mod-row">
+
+                            <span class="mod-name">
+                                Example Mod
+                            </span>
+
+                            <div class="toggle on"></div>
+
+                        </div>
+
+                        <div class="mod-row">
+
+                            <span class="mod-name">
+                                Another Mod
+                            </span>
+
+                            <div class="toggle"></div>
+
+                        </div>
+
+                        <div class="mod-row">
+
+                            <span class="mod-name">
+                                Visual Option
+                            </span>
+
+                            <div class="toggle on"></div>
+
+                        </div>
+
+                        <div class="mod-row">
+
+                            <span class="mod-name">
+                                UI Option
+                            </span>
+
+                            <div class="toggle"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     DOWNLOAD
+========================= -->
+
+<section id="download">
+
+    <div class="container">
+
+        <div class="reveal">
+
+            <div class="section-label">
+                GET STARTED
+            </div>
+
+            <div class="section-title">
+                Mod <span>Differently.</span>
+            </div>
+
+            <p class="section-description">
+                Explore the Solara experience and check out
+                the community.
+            </p>
+
+            <div style="margin-top:30px; display:flex; gap:12px;">
+
+                <a
+                    href="#ui"
+                    class="nav-button"
+                    style="
+                        text-decoration:none;
+                        padding:13px 20px;
+                        border-radius:11px;
+                        font-size:13px;
+                        font-weight:700;
+                    "
+                >
+                    Try UI →
+                </a>
+
+                <a
+                    href="https://discord.gg/ext7RjH4gy"
+                    target="_blank"
+                    style="
+                        text-decoration:none;
+                        padding:13px 20px;
+                        border-radius:11px;
+                        font-size:13px;
+                        font-weight:700;
+                        color:#aaa5b6;
+                        border:1px solid rgba(255,255,255,.08);
+                    "
+                >
+                    Discord
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 <footer>
-
-    © 2026 <strong>Seraph</strong>
-    • Dev: ItzzRaindeer
-
+    © 2026 Solara • Dev: ZykerGT
 </footer>
-
-
-<!-- PARTICLES -->
 
 <script>
 
-const container = document.getElementById("particles");
+/* =========================
+   TYPING EFFECT
+========================= */
 
-for (let i = 0; i < 55; i++) {
+const messages = [
+    "Build For Meta",
+    "Your Mods. Your Menu",
+    "Best ADB/PCVR Mods.",
+    "Simple. Clean U.I",
+    "Welcome To Solara."
+];
 
-    const particle = document.createElement("div");
+const typingElement = document.querySelector(".typing");
 
-    particle.className = "particle";
+let messageIndex = 0;
+let characterIndex = 0;
+let deleting = false;
 
-    particle.style.left =
-        Math.random() * 100 + "%";
+function typeMessage() {
 
-    particle.style.animationDuration =
-        (Math.random() * 10 + 8) + "s";
+    const current = messages[messageIndex];
 
-    particle.style.animationDelay =
-        (Math.random() * 10) + "s";
+    if (!deleting) {
 
-    particle.style.opacity =
-        Math.random() * .4;
+        typingElement.textContent =
+            current.substring(0, characterIndex + 1);
 
-    container.appendChild(particle);
+        characterIndex++;
+
+        if (characterIndex === current.length) {
+
+            setTimeout(() => {
+                deleting = true;
+            }, 1700);
+
+        }
+
+    } else {
+
+        typingElement.textContent =
+            current.substring(0, characterIndex - 1);
+
+        characterIndex--;
+
+        if (characterIndex === 0) {
+
+            deleting = false;
+
+            messageIndex =
+                (messageIndex + 1) % messages.length;
+
+        }
+
+    }
+
+    const speed = deleting ? 45 : 80;
+
+    setTimeout(typeMessage, speed);
 }
+
+typeMessage();
+
+
+/* =========================
+   SCROLL PROMPT
+========================= */
+
+const scrollMore =
+    document.getElementById("scrollMore");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 40) {
+        scrollMore.classList.add("hidden");
+    } else {
+        scrollMore.classList.remove("hidden");
+    }
+
+});
+
+
+/* =========================
+   SECTION DOTS
+========================= */
+
+const sections = [
+    document.getElementById("home"),
+    document.getElementById("features"),
+    document.getElementById("ui"),
+    document.getElementById("download")
+];
+
+const dots =
+    document.querySelectorAll(".scroll-dot");
+
+function updateDots() {
+
+    let current = 0;
+
+    sections.forEach((section, index) => {
+
+        const top =
+            section.getBoundingClientRect().top;
+
+        if (top <= window.innerHeight / 2) {
+            current = index;
+        }
+
+    });
+
+    dots.forEach((dot, index) => {
+
+        dot.classList.toggle(
+            "active",
+            index === current
+        );
+
+    });
+
+}
+
+window.addEventListener("scroll", updateDots);
+
+dots.forEach((dot, index) => {
+
+    dot.addEventListener("click", () => {
+
+        sections[index].scrollIntoView({
+            behavior: "smooth"
+        });
+
+    });
+
+});
+
+
+/* =========================
+   REVEAL ANIMATIONS
+========================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .15
+        }
+    );
+
+revealElements.forEach(element => {
+    observer.observe(element);
+});
 
 </script>
 
