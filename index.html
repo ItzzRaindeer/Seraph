@@ -3,256 +3,859 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seraph Menu</title>
+<title>Seraph — Official</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    body {
-        background: #0d0d12;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --purple: #9b59ff;
+    --purple2: #c084ff;
+    --bg: #07070b;
+    --panel: rgba(20, 20, 29, 0.72);
+    --border: rgba(255,255,255,0.08);
+    --text: #fff;
+    --muted: #9696a5;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* ================= BACKGROUND ================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 15%, rgba(155,89,255,.16), transparent 32%),
+        radial-gradient(circle at 10% 80%, rgba(112,60,204,.08), transparent 30%),
+        #07070b;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .18;
+    animation: drift 12s ease-in-out infinite alternate;
+}
+
+.orb.one {
+    width: 350px;
+    height: 350px;
+    background: #9b59ff;
+    top: -120px;
+    left: 10%;
+}
+
+.orb.two {
+    width: 300px;
+    height: 300px;
+    background: #713dcc;
+    right: -100px;
+    top: 35%;
+    animation-delay: -4s;
+}
+
+.orb.three {
+    width: 250px;
+    height: 250px;
+    background: #b36cff;
+    left: 25%;
+    bottom: -100px;
+    animation-delay: -7s;
+}
+
+@keyframes drift {
+    from {
+        transform: translate(0,0) scale(1);
     }
+    to {
+        transform: translate(50px,-30px) scale(1.15);
+    }
+}
+
+/* ================= PARTICLES ================= */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #b987ff;
+    border-radius: 50%;
+    opacity: .35;
+    animation: rise linear infinite;
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+    20% {
+        opacity: .4;
+    }
+    80% {
+        opacity: .25;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, calc(100% - 30px));
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    background: rgba(12,12,18,.72);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo-mark {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 9px;
+
+    background: linear-gradient(135deg, #b878ff, #713dcc);
+    box-shadow: 0 0 25px rgba(155,89,255,.4);
+
+    font-size: 15px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.nav-links a {
+    color: #a7a7b3;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.discord-nav {
+    padding: 10px 15px;
+    border-radius: 9px;
+
+    background: var(--purple);
+    color: white !important;
+
+    box-shadow: 0 0 22px rgba(155,89,255,.25);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 130px 20px 80px;
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border-radius: 100px;
+
+    border: 1px solid rgba(155,89,255,.3);
+    background: rgba(155,89,255,.08);
+
+    color: #d5baff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 0 30px rgba(155,89,255,.08);
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a66aff;
+    box-shadow: 0 0 12px #9b59ff;
+}
+
+.hero h1 {
+    font-size: clamp(65px, 12vw, 140px);
+    line-height: .9;
+
+    font-weight: 900;
+    letter-spacing: -5px;
+
+    background: linear-gradient(
+        135deg,
+        white 20%,
+        #d9bdff 55%,
+        #9b59ff 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow: 0 0 70px rgba(155,89,255,.15);
+
+    animation: heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.hero h2 {
+    margin-top: 20px;
+
+    font-size: clamp(20px, 3vw, 28px);
+    color: #dedee5;
+    font-weight: 600;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 22px auto 35px;
+
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 14px 23px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: .25s;
+}
+
+.primary {
+    color: white;
+    background: linear-gradient(135deg,#a765ff,#7a3fd3);
+
+    box-shadow:
+        0 0 25px rgba(155,89,255,.3),
+        inset 0 1px rgba(255,255,255,.18);
+}
+
+.primary:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 40px rgba(155,89,255,.45);
+}
+
+.secondary {
+    color: white;
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border);
+}
+
+.secondary:hover {
+    transform: translateY(-4px);
+    border-color: rgba(155,89,255,.5);
+    background: rgba(155,89,255,.08);
+}
+
+/* ================= SECTION ================= */
+
+.section {
+    padding: 110px 7%;
+}
+
+.section-header {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-header .small {
+    color: var(--purple2);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-header h2 {
+    font-size: clamp(32px,5vw,48px);
+    margin: 12px 0;
+}
+
+.section-header p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* ================= CARDS ================= */
+
+.cards {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.card {
+    position: relative;
+
+    padding: 30px;
+
+    background: var(--panel);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    transition: .3s;
+}
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    right: -70px;
+    top: -70px;
+
+    background: var(--purple);
+    filter: blur(65px);
+
+    opacity: 0;
+
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(155,89,255,.4);
+}
+
+.card:hover::after {
+    opacity: .18;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: rgba(155,89,255,.11);
+    border: 1px solid rgba(155,89,255,.16);
+
+    color: #bd91ff;
+
+    font-size: 20px;
+
+    margin-bottom: 22px;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 11px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+    max-width: 900px;
+    margin: 55px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+}
+
+.stat {
+    text-align: center;
+
+    padding: 27px;
+
+    background: rgba(15,15,22,.7);
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.stat strong {
+    display: block;
+
+    font-size: 31px;
+
+    background: linear-gradient(135deg,#fff,#9b59ff);
+    -webkit-background-clip: text;
+    color: transparent;
+
+    margin-bottom: 6px;
+}
+
+.stat span {
+    color: #777784;
+    font-size: 12px;
+}
+
+/* ================= DOWNLOAD ================= */
+
+.download {
+    max-width: 1000px;
+    margin: auto;
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(155,89,255,.13),
+            transparent 60%
+        ),
+        rgba(17,17,24,.8);
+
+    border: 1px solid rgba(155,89,255,.22);
+
+    box-shadow:
+        0 0 80px rgba(155,89,255,.07);
+}
+
+.download h2 {
+    font-size: clamp(35px,5vw,55px);
+    margin-bottom: 13px;
+}
+
+.download p {
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    border-top: 1px solid var(--border);
+
+    color: #5f5f6b;
+    font-size: 12px;
+}
+
+footer strong {
+    color: var(--purple);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px) {
 
     .navbar {
-        height: 70px;
-        background: #14141c;
-        border-bottom: 1px solid #292936;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 50px;
-    }
-
-    .logo {
-        color: #9b59ff;
-        font-size: 25px;
-        font-weight: bold;
+        top: 10px;
     }
 
     .nav-links {
-        display: flex;
-        gap: 30px;
+        gap: 12px;
     }
 
-    .nav-links a {
-        color: #aaa;
-        text-decoration: none;
-        transition: 0.2s;
-    }
-
-    .nav-links a:hover {
-        color: #9b59ff;
-    }
-
-    .hero {
-        min-height: 520px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 50px 20px;
-    }
-
-    .hero-content {
-        max-width: 700px;
-    }
-
-    .hero h1 {
-        font-size: 75px;
-        margin-bottom: 15px;
-        color: #9b59ff;
-        text-shadow: 0 0 30px rgba(155, 89, 255, 0.35);
-    }
-
-    .hero h2 {
-        font-size: 24px;
-        margin-bottom: 15px;
-    }
-
-    .hero p {
-        color: #999;
-        font-size: 17px;
-        line-height: 1.6;
-        margin-bottom: 30px;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-    }
-
-    .button {
-        padding: 13px 25px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.2s;
-    }
-
-    .primary {
-        background: #9b59ff;
-        color: white;
-    }
-
-    .primary:hover {
-        background: #8241e6;
-        transform: translateY(-2px);
-    }
-
-    .secondary {
-        border: 1px solid #393945;
-        color: white;
-        background: #17171f;
-    }
-
-    .secondary:hover {
-        border-color: #9b59ff;
-    }
-
-    .features {
-        background: #111118;
-        padding: 70px 50px;
-    }
-
-    .features h2 {
-        text-align: center;
-        margin-bottom: 40px;
-        font-size: 32px;
+    .nav-links a:not(.discord-nav) {
+        display: none;
     }
 
     .cards {
-        max-width: 1000px;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        grid-template-columns: 1fr;
     }
 
-    .card {
-        background: #181820;
-        border: 1px solid #292936;
-        border-radius: 12px;
-        padding: 30px;
-        text-align: center;
+    .stats {
+        grid-template-columns: 1fr;
     }
 
-    .card h3 {
-        color: #9b59ff;
-        margin-bottom: 12px;
+    .hero h1 {
+        letter-spacing: -3px;
     }
 
-    .card p {
-        color: #999;
-        line-height: 1.5;
+    .section {
+        padding: 80px 20px;
     }
-
-    footer {
-        text-align: center;
-        padding: 25px;
-        color: #666;
-        background: #0d0d12;
-    }
-
-    @media (max-width: 700px) {
-        .cards {
-            grid-template-columns: 1fr;
-        }
-
-        .navbar {
-            padding: 0 20px;
-        }
-
-        .nav-links {
-            gap: 12px;
-        }
-
-        .hero h1 {
-            font-size: 55px;
-        }
-    }
+}
 </style>
 </head>
 
 <body>
 
+<!-- BACKGROUND -->
+
+<div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+</div>
+
+<div class="particles" id="particles"></div>
+
+
+<!-- NAVBAR -->
+
 <nav class="navbar">
-    <div class="logo">SERAPH</div>
+
+    <div class="logo">
+        <div class="logo-mark">S</div>
+        SERAPH
+    </div>
 
     <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#features">Features</a>
         <a href="#download">Download</a>
+
+        <a
+            class="discord-nav"
+            href="https://discord.gg/ext7RjH4gy"
+            target="_blank"
+        >
+            Discord
+        </a>
     </div>
+
 </nav>
 
+
+<!-- HERO -->
+
 <section class="hero" id="home">
+
     <div class="hero-content">
+
+        <div class="badge">
+            <span class="badge-dot"></span>
+            V2.1 • Latest Release
+        </div>
+
         <h1>SERAPH</h1>
 
-        <h2>Welcome to Seraph</h2>
+        <h2>Built Different.</h2>
 
         <p>
-            The official Seraph website.
-            Check out the latest updates, features, and information.
+            Welcome to the official Seraph website.
+            Explore the project, discover what's new,
+            and stay connected with the community.
         </p>
 
         <div class="buttons">
-            <a class="button primary" href="#download">Get Started</a>
-            <a class="button secondary" href="#features">Features</a>
+
+            <a class="button primary" href="#download">
+                Get Started →
+            </a>
+
+            <a class="button secondary" href="#features">
+                Explore Features
+            </a>
+
         </div>
+
     </div>
+
 </section>
 
-<section class="features" id="features">
-    <h2>Features</h2>
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+    <div class="section-header">
+
+        <div class="small">
+            SERAPH
+        </div>
+
+        <h2>
+            Everything in one place.
+        </h2>
+
+        <p>
+            A clean and modern home for the Seraph project.
+        </p>
+
+    </div>
+
 
     <div class="cards">
 
         <div class="card">
-            <h3>Clean UI</h3>
+
+            <div class="icon">✦</div>
+
+            <h3>
+                Clean Interface
+            </h3>
+
             <p>
-                A simple dark interface with the signature Seraph purple theme.
+                A polished dark interface with Seraph's
+                signature purple aesthetic.
             </p>
+
         </div>
 
-        <div class="card">
-            <h3>Updates</h3>
-            <p>
-                Keep up with new versions and changes to the project.
-            </p>
-        </div>
 
         <div class="card">
-            <h3>Community</h3>
+
+            <div class="icon">⚡</div>
+
+            <h3>
+                Regular Updates
+            </h3>
+
             <p>
-                Stay connected and follow the latest Seraph news.
+                Keep up with new versions, improvements,
+                and changes to the project.
             </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">◈</div>
+
+            <h3>
+                Community
+            </h3>
+
+            <p>
+                Join the Discord community and stay
+                up to date with announcements.
+            </p>
+
         </div>
 
     </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>V2.1</strong>
+            <span>Current Version</span>
+        </div>
+
+        <div class="stat">
+            <strong>35+</strong>
+            <span>Features</span>
+        </div>
+
+        <div class="stat">
+            <strong>2026</strong>
+            <span>Project Year</span>
+        </div>
+
+    </div>
+
 </section>
 
-<section class="hero" id="download">
-    <div class="hero-content">
-        <h2>Seraph</h2>
+
+<!-- DOWNLOAD -->
+
+<section class="section" id="download">
+
+    <div class="download">
+
+        <div class="badge">
+            <span class="badge-dot"></span>
+            SERAPH COMMUNITY
+        </div>
+
+        <h2>
+            Ready to join?
+        </h2>
 
         <p>
-            More information and downloads can be added here later.
+            Check out the Seraph community for announcements,
+            updates, and more information about the project.
         </p>
 
-        <a class="button primary" href="#home">Back to Home</a>
+        <div class="buttons">
+
+            <a
+                class="button primary"
+                href="https://discord.gg/ext7RjH4gy"
+                target="_blank"
+            >
+                Join Discord →
+            </a>
+
+            <a
+                class="button secondary"
+                href="#home"
+            >
+                Back to Top
+            </a>
+
+        </div>
+
     </div>
+
 </section>
 
+
+<!-- FOOTER -->
+
 <footer>
-    © 2026 Seraph · Dev: ItzzRaindeer
+
+    © 2026 <strong>Seraph</strong>
+    • Dev: ItzzRaindeer
+
 </footer>
+
+
+<!-- PARTICLES -->
+
+<script>
+
+const container = document.getElementById("particles");
+
+for (let i = 0; i < 55; i++) {
+
+    const particle = document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+    particle.style.animationDuration =
+        (Math.random() * 10 + 8) + "s";
+
+    particle.style.animationDelay =
+        (Math.random() * 10) + "s";
+
+    particle.style.opacity =
+        Math.random() * .4;
+
+    container.appendChild(particle);
+}
+
+</script>
 
 </body>
 </html>
